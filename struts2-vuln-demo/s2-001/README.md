@@ -1,4 +1,4 @@
-## Struts2 S2-003
+## Struts2 S2-001
 
 ### Environment
 
@@ -24,6 +24,6 @@ Open the project with idea, and readd all the jars at web/WEB_INF/lib.
 
 ### Reference
 
-- [【Struts2-命令-代码执行漏洞分析系列】S2-003和S3-005](https://xz.aliyun.com/t/2044)
+- [【Struts2-命令-代码执行漏洞分析系列】S2-001](https://xz.aliyun.com/t/2044)
 
 
