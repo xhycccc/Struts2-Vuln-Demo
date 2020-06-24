@@ -1,4 +1,4 @@
-## Struts2 S2-003
+## S2-003 Demo
 
 ### Environment
 
@@ -8,7 +8,7 @@ Tomcat: `6.0.9 (I only run payload behind successful in this version).`
 
 IDE: idea 2020.1.1
 
-Open the project with idea, and readd all the jars at web/WEB_INF/lib.
+(Maybe you should do this.) Open the project with idea, and readd all the jars at web/WEB_INF/lib.
 
 ![{86B8007A-5296-441A-9637-0A5AFBDF7FE6}_20200619163625]({86B8007A-5296-441A-9637-0A5AFBDF7FE6}_20200619163625.jpg)
 
