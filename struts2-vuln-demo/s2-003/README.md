@@ -6,7 +6,7 @@ Struts2 Version: `struts-2.0.11.2-all`
 
 Tomcat: `6.0.9 (I only run payload behind successful in this version).`
 
-IDE: idea 2020.1.1
+IDE: `idea 2020.1.1 ULTIMATE`
 
 (Maybe you should do this.) Open the project with idea, and readd all the jars at web/WEB_INF/lib.
 
