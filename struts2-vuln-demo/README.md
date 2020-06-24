@@ -1,3 +1,3 @@
 ## Overview
 
-Recording source code in learning struts2 vulnerability.
+Recording the source code in learning struts2 vulnerability.
