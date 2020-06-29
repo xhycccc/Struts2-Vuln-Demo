@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true" />
+    <package name="S2-008" extends="struts-default">
+        <action name="cookie" class="org.test.action.CookieAction">
+            <interceptor-ref name="cookie">
+                <param name="cookieName">*</param>
+                <param name="cookieValue">*</param>
+            </interceptor-ref>
+            <result name="success">/cookie.jsp</result>
+        </action>
+        <action name="devmode" class="org.test.action.DevmodeAction">
+            <result name="success">/devmode.jsp</result>
+        </action>
+    </package>
+</struts>
