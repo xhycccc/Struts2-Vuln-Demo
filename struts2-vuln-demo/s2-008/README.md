@@ -35,9 +35,8 @@ IDE: `idea 2020.1.1 ULTIMATE`
 
 ## Reference
 
-- [S2-007 远程代码执行漏洞](https://github.com/vulhub/vulhub/blob/master/struts2/s2-007/README.zh-cn.md)
+- [struts2最近几个漏洞分析&稳定利用payload](http://drops.xmd5.com/static/drops/papers-902.html)
 
 
-* [【Struts2-命令-代码执行漏洞分析系列】S2-007](https://xz.aliyun.com/t/2684)
+* [S2-008](https://cwiki.apache.org/confluence/display/WW/S2-008)
 
-* [S2-007](https://cwiki.apache.org/confluence/display/WW/S2-007)
