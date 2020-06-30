@@ -12,7 +12,7 @@ Problem: `XWork` bypass allows `OGNL` statement execution
 
 Struts2 Version: `struts-2.0.11.2-all`
 
-Server: `Tomcat 6.0.9` (I only run payload successful in this version).
+Server: `Tomcat 6.0.9` (Only in this version did I run payload successfully).
 
 IDE: `idea 2020.1.1 ULTIMATE`
 
