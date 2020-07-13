@@ -6,7 +6,7 @@ Impact of vulnerability: Remote command execution
 
 Affected Software: `Struts 2.0.0` - `Struts 2.3.1.1`
 
-Problem: `XWork` bypass allows `OGNL` statement execution
+Problem: The vulnerability allows a malicious user to bypass all the protections (regex pattern, deny method invocation) built into the ParametersInterceptor, thus being able to inject a malicious expression in any exposed string variable for further evaluation.
 
 ## Environment
 
