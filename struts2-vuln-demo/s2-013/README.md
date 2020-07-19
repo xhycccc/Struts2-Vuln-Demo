@@ -46,7 +46,7 @@ IDE: `idea 2020.1.1 ULTIMATE`
 
 继续跟进，进入`end`函数：
 
-![end](img\end.png)
+![end](img/end.png)
 
 跟进`renderUrl` -> `determineActionURL` -> `buildURL` -> `buildParametersString` -> `translateAndEncode`:
 
