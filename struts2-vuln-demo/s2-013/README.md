@@ -24,7 +24,7 @@ IDE: `idea 2020.1.1 ULTIMATE`
 
 ## POC
 
-![20200718101337](img\20200718101337.png)
+![20200718101337](img/20200718101337.png)
 
 ## Payload
 
@@ -36,11 +36,11 @@ IDE: `idea 2020.1.1 ULTIMATE`
 
 `s2-013/web/WEB-INF/lib/struts2-core-2.2.3.jar!/org/apache/struts2/components/ComponentUrlProvider.class:73`
 
-![getIncludeParams](img\getIncludeParams.png)
+![getIncludeParams](img/getIncludeParams.png)
 
 然后进入到`beforeRenderUrl`函数中。可以看到这个函数将我们提交的恶意参数include进来：
 
-![includeParams](img\includeParams.png)
+![includeParams](img/includeParams.png)
 
 接下来找哪里将表达式进行了解析。
 
@@ -50,19 +50,19 @@ IDE: `idea 2020.1.1 ULTIMATE`
 
 跟进`renderUrl` -> `determineActionURL` -> `buildURL` -> `buildParametersString` -> `translateAndEncode`:
 
-![1595138319483](E:\Project\CodeAuditLearning\struts2-vuln-demo\s2-013\img\renderUrl.png)
+![1595138319483](img/renderUrl.png)
 
-![1595136376298](img\buildUrl.png)
+![1595136376298](img/buildUrl.png)
 
-![1595136451346](img\buildParametersString.png)
+![1595136451346](img/buildParametersString.png)
 
-![1595136519253](img\translateAndEncode.png)
+![1595136519253](img/translateAndEncode.png)
 
 一直跟进translate函数，直到TextParseUtil类的translateVariables方法中，通过stack.findValue方法触发OGNL表达式执行。
 
 `s2-013/web/WEB-INF/lib/xwork-core-2.2.3.jar!/com/opensymphony/xwork2/util/TextParseUtil.class:90`
 
-![1595136693874](img\stackFindValue.png)
+![1595136693874](img/stackFindValue.png)
 
 
 
