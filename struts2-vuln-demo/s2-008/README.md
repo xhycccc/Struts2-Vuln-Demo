@@ -18,8 +18,6 @@ IDE: `idea 2020.1.1 ULTIMATE`
 
 ## POC
 
-
-
 ![devmode](devmode.jpg)
 
 ## Payload
