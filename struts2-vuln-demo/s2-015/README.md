@@ -56,7 +56,7 @@ IDE: `idea 2020.1.1 ULTIMATE`
 
 第二个问题有点类似于`s2-012`，这里不分析了，只看下第一个。
 
-在`s2-015/web/WEB-INF/lib/xwork-core-2.2.3.jar!/com/opensymphony/xwork2/DefaultActionInvocation.class:199`下个断点，这块是已经通过前面的interceptor，准备执行action的execute方法。
+在`s2-015/web/WEB-INF/lib/xwork-core-2.2.3.jar!/com/opensymphony/xwork2/DefaultActionInvocation.class:199`下个断点，这里是已经执行过前面所有的interceptor，准备执行action的execute方法。
 
 发送`payload1`触发断点。
 
