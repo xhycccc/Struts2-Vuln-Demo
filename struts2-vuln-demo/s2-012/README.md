@@ -10,6 +10,12 @@ Problem: 在`S2-003`、`S2-005`和`S2-009`中已经解决了`OGNL`表达式解�
 
 当`action`中配置`result`为`redirect`并且传递了某个参数，在触发`redirect`类型返回时，`Struts2` 获取使用`${name}` 获取其值，在这个过程中会对`name`参数的值执行` OGNL` 表达式解析，从而可以插入任意 `OGNL` 表达式导致命令执行。
 
+```java
+<action name="index" class="org.test.IndexAction">
+	<result name="redirect" type="redirect">/redirect.action?user=${name}</result>
+</action>
+```
+
 ## Environment
 
 Struts2 Version: `Struts-2.2.3`
