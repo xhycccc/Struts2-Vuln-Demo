@@ -6,7 +6,7 @@ Impact of vulnerability: Remote command execution
 
 Affected Software:  `Struts 2.0.0` - `Struts 2.3.15`
 
-Problem: 在struts2中，DefaultActionMapper类支持以"action:"、"redirect:"、"redirectAction:"作为导航或是重定向前缀，但是这些前缀后面同时可以跟OGNL表达式，由于struts2没有对这些前缀做过滤，导致利用OGNL表达式调用java静态方法执行任意系统命令。
+Problem: 在struts2中，`DefaultActionMapper`类支持以`action:`、`redirect:`、`redirectAction:`作为导航或是重定向前缀，但是这些前缀后面同时可以跟`OGNL`表达式，由于struts2没有对这些前缀做过滤，导致利用`OGNL`表达式调用java静态方法执行任意系统命令。
 
 ## Environment
 
