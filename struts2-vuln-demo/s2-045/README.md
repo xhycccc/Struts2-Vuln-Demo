@@ -34,7 +34,23 @@ Content-Type: %{(#nike='multipart/form-data').(#dm=@ognl.OgnlContext@DEFAULT_MEM
 
 ## Debug
 
+详细的debug可参考：
 
+https://blog.csdn.net/u011721501/article/details/60768657
+
+https://paper.seebug.org/247/
+
+这里简单说明一下漏洞成因。
+
+传入非法的Content-type会引发JakartaMultiPartRequest类报错，并调用buildErrorMessage()方法处理错误信息。该方法调用findText()方法时传入了detailMessage参数，而detailMessage参数将Content-type的值拼接了进来。
+
+![image-20200724184101426](image-20200724184101426.png)
+
+一直跟入findText() -> getDefaultMessage() -> translateVariables()，并且传入的是拼接有Content-Type值得message。
+
+![image-20200724185053893](image-20200724185053893.png)
+
+这个translateVariables之前分析过，解析传入的字符串是否是`%{`和`${`打头的，如果有就提取出来作为`ognl`表达式解析。这也是很多struts2 ognl表达式注入漏洞最终的触发点吧。
 
 ## Reference
 
