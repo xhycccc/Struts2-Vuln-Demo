@@ -2,19 +2,25 @@
 
 ## Summary
 
-Impact of vulnerability: Possible RCE when performing file upload based on Jakarta Multipart parser
+| Who should read this    | All Struts 2 developers and users                            |
+| :---------------------- | ------------------------------------------------------------ |
+| Impact of vulnerability | Possible RCE when performing file upload based on Jakarta Multipart parser |
+| Maximum security rating | Critical                                                     |
+| Recommendation          | Upgrade to [Struts 2.3.32](https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.3.32) or [Struts 2.5.10.1](https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.5.10.1) |
+| Affected Software       | Struts 2.3.5 - Struts 2.3.31, Struts 2.5 - Struts 2.5.10     |
+| Reporter                | Nike Zheng <nike dot zheng at dbappsecurity dot com dot cn>  |
+| CVE Identifier          | CVE-2017-5638                                                |
 
-Affected Software:  `Struts 2.3.5` - `Struts 2.3.31`, `Struts 2.5 - Struts 2.5.10`
+## Problem
 
-Problem: 在使用基于Jakarta插件的文件上传功能时，有可能存在远程命令执行，导致系统被黑客入侵。恶意用户可在上传文件时通过修改HTTP请求头中的Content-Type值来触发该漏洞，进而执行系统命令。
+在使用基于Jakarta插件的文件上传功能时，有可能存在远程命令执行，导致系统被黑客入侵。恶意用户可在上传文件时通过修改HTTP请求头中的Content-Type值来触发该漏洞，进而执行系统命令。
 
 ## Environment
 
-Struts2 Version: `Struts-2.3.24`
-
-Server: `Tomcat 8.5.53`
-
-IDE: `idea 2020.1.1 ULTIMATE`
+| Struts2 Version | Struts-2.3.24          |
+| --------------- | ---------------------- |
+| Server          | Tomcat 8.5.53          |
+| IDE             | IDEA 2020.1.1 ULTIMATE |
 
 ## POC
 
