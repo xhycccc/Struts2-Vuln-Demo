@@ -18,8 +18,8 @@
 ## Environment
 
 | Struts2 Version | Struts-2.3.24          |
-| --------------- | ---------------------- |
-| Server          | Tomcat 8.5.53          |
+| :-------------- | :--------------------- |
+| Web Server      | Tomcat 8.5.53          |
 | IDE             | IDEA 2020.1.1 ULTIMATE |
 
 ## POC
