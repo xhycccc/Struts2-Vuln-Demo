@@ -11,6 +11,6 @@
     <title>File Upload Success</title>
 </head>
 <body>
-    <h2>Upload</h2>
+    <h2>File upload success.</h2>
 </body>
 </html>

@@ -44,6 +44,8 @@ https://paper.seebug.org/247/
 
 传入非法的Content-type会引发JakartaMultiPartRequest类报错，并调用buildErrorMessage()方法处理错误信息。该方法调用findText()方法时传入了detailMessage参数，而detailMessage参数将Content-type的值拼接了进来。
 
+`s2-046/web/WEB-INF/lib/struts2-core-2.3.24.jar!/org/apache/struts2/dispatcher/multipart/JakartaMultiPartRequest.class:91`
+
 ![image-20200724184101426](image-20200724184101426.png)
 
 一直跟入findText() -> getDefaultMessage() -> translateVariables()，并且传入的是拼接有Content-Type值得message。
