@@ -58,7 +58,7 @@ with socket.create_connection(('localhost', '8080'), timeout=5) as conn:
 
 具体分析可参考：[【漏洞分析】Struts2 S2-046 漏洞原理分析）](https://www.anquanke.com/post/id/85776)。在这里只记录一下调试入口以及大致原理。
 
-Content-Disposition中的Filename参数存在空字节，在检查时会抛出异常，于是进入buildErrorMessage()方法。
+Content-Disposition中的Filename参数存在空字节，在检查时会抛出异常，会进入buildErrorMessage()方法。
 
 在buildErrorMessage()方法处下断点，运行exp触发断点。
 
