@@ -2,7 +2,8 @@ package org.test;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class IndexAction extends ActionSupport {
+public class
+IndexAction extends ActionSupport {
     private String message = "No input";
     @Override
     public String execute() throws Exception {
