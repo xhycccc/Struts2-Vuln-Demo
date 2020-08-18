@@ -45,7 +45,7 @@ payload:
 
 `s2-053/web/WEB-INF/lib/xwork-core-2.3.24.jar!/com/opensymphony/xwork2/DefaultActionInvocation.class:300`
 
-![1597546189396](img\1597546189396.png)
+![1597546189396](img/1597546189396.png)
 
 createResult通过获取配置文件struts.xml中的result信息创建Result。由于我们配置的是`<result name="success" type="freemarker">index.ftl</result>`，所以创建的Result类型为FreemarkerResult。跟入execute方法：
 
