@@ -93,7 +93,7 @@ Struts2 会对某些标签属性（比如`id`，其他属性有待寻找）的�
 
 5. 受影响的属性
 
-   虽然`org.apache.struts2.components.UIBean#evaluateParams`方法中有很多属性使用findString()来获取值。但是除了id可以解析两次ognl外（算上前面的setId解析了一次），这些属性都仅解析了一次。例如同时name和id属性都存在有漏洞的写法：`<s:textfield name="%{skillName}" label="skillName" id="%{skillName}"/>`，传入`skillName=%{11*11}`，最后id解析出来是121，而name则是%{11*11}. 
+   虽然`org.apache.struts2.components.UIBean#evaluateParams`方法中有很多属性使用findString()来获取值。但是除了id可以解析两次ognl外（算上前面的setId解析了一次），这些属性都仅解析了一次。例如同时name和id属性都存在有漏洞的写法：`<s:textfield name="%{skillName}" label="skillName" id="%{skillName}"/>`，传入`skillName=%{11*11}`，最后id解析出来是121，而name则是`%{11*11}`。所以应该只有id了吧。。
 
 ## Reference
 
