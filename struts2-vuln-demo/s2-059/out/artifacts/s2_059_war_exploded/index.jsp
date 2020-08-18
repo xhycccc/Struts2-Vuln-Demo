@@ -13,12 +13,13 @@
   </head>
   <body>
   <h2>S2-059 Demo</h2>
-  <s:url var="url" action="index"/>
-  <s:a id="%{skillName}" href="%{url}">List available Employees</s:a>
+  a标签： <s:url var="url" action="index"/><s:a id="%{skillName}" href="%{url}">List available Employees</s:a><br/>
+  label标签:  <s:label id="%{skillName}" value="label test"/><br/><br/>
+
   <s:form action="index" method="POST">
-    <s:textfield name="skillName" label="skillName"/>
-    <s:textfield name="url" label="url"/>
-    <s:submit value="Submit" />
+    <s:textfield name="skillName" label="skillName" id="%{skillName}"/>
+    <s:textfield name="url" label="url" id="%{url}"/>
+    <s:submit value="Submit"/>
   </s:form>
 
   </body>
