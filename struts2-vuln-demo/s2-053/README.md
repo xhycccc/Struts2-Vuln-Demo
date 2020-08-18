@@ -108,11 +108,10 @@ public void doExecute(String locationArg, ActionInvocation invocation) throws IO
 
 最后发现了熟悉的translateVariables()方法，调用evaluate方法解析了payload中的ognl表达式。调用栈如下：
 
-![1597588794722](E:\Project\CodeAuditLearning\struts2-vuln-demo\s2-053\img\1597587950056.png)
+![1597588794722](img/1597587950056.png)
 
+## Reference
 
+- [S2-053](https://cwiki.apache.org/confluence/display/WW/S2-053)
 
-
-
-发现执行tc.afterBody()后弹出计算器（将payload中命令换为calc，方便知道哪里发生命令执行）。跟入afterBody()，
-
+- [S2-053 远程代码执行漏洞](https://github.com/vulhub/vulhub/blob/master/struts2/s2-053/README.zh-cn.md)
