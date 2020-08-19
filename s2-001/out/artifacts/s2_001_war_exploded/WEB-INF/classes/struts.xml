@@ -9,6 +9,7 @@
         <action name="login" class="org.test.LoginActoin">
             <result name="success">welcome.jsp</result>
             <result name="error">index.jsp</result>
+            <result name="input">index.jsp</result>
             <param name="username">test</param>
         </action>
     </package>

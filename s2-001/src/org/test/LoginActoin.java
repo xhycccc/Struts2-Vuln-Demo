@@ -12,7 +12,7 @@ public class LoginActoin extends ActionSupport {
         if ((this.username.isEmpty()) || (this.password.isEmpty())) {
             return "error";
         }
-        if ((this.username.equalsIgnoreCase("admin"))
+        if ((this.username.equals("admin"))
                 && (this.password.equals("admin"))) {
             return "success";
         }
