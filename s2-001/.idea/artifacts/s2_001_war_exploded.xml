@@ -9,6 +9,15 @@
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Struts 2" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/ognl-2.6.7.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/commons-io-1.1.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/commons-lang-2.1.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/freemarker-2.3.4.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/xwork-2.0-beta-1.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/struts2-core-2.0.1.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/commons-logging-1.0.4.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/commons-fileupload-1.1.1.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/web/WEB-INF/lib/struts2-api-2.0.1.jar" />
         </element>
       </element>
     </root>
