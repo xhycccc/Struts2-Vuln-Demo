@@ -23,6 +23,6 @@
         <s:a href="%{url}">Espanol</s:a>
     </li>
 </ul>
-
+<s:debug></s:debug>
 </body>
 </html>

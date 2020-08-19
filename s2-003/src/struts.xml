@@ -13,5 +13,14 @@
         <action name="HelloWorld" class="org.test.HelloWorld">
             <result name="success">HelloWorld.jsp</result>
         </action>
+        <action name="prepare" class="org.test.TestPrepare">
+            <result name="chain" type="chain">chain</result>
+        </action>
+        <action name="chain" class="org.test.TestChain">
+            <result name="success">HelloWorld.jsp</result>
+        </action>
+        <action name="model" class="org.test.TestModelDriven">
+            <result name="success">model.jsp</result>
+        </action>
     </package>
 </struts>
