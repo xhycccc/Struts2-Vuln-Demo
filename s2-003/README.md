@@ -17,10 +17,10 @@ Ognl的上下文对象必须要使用#符号，Struts2虽然对#号进行过滤�
 
 ## Environment
 
-| Struts2 Version | struts-2.0.11.2-all                                          |
-| --------------- | ------------------------------------------------------------ |
-| Server          | Tomcat 6.0.9 (Only in this version did I run payload successfully) |
-| IDE             | idea 2020.1.1 ULTIMATE                                       |
+| Struts2 Version | struts-2.0.11.2        |
+| --------------- | ---------------------- |
+| Server          | Tomcat 6.0.9           |
+| IDE             | idea 2020.1.1 ULTIMATE |
 
 ## POC
 
@@ -43,3 +43,4 @@ vulhub有在tomcat8测试成功，大家可以试试：
 - [S2-005 远程代码执行漏洞](https://github.com/vulhub/vulhub/blob/master/struts2/s2-005/README.zh-cn.md)
 
 * [S2-003](https://cwiki.apache.org/confluence/display/WW/S2-003)
+

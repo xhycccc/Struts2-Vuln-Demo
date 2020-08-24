@@ -21,10 +21,10 @@ S2-005的出现时因为官方对S2-003的修补的不完全而导致。官方�
 
 ## Environment
 
-| Struts2 Version | struts-2.0.11.2-all                                          |
-| --------------- | ------------------------------------------------------------ |
-| Server          | Tomcat 6.0.9 (Only in this version did I run payload successfully) |
-| IDE             | idea 2020.1.1 ULTIMATE                                       |
+| Struts2 Version | struts-2.0.11.2        |
+| --------------- | ---------------------- |
+| Server          | Tomcat 6.0.9           |
+| IDE             | idea 2020.1.1 ULTIMATE |
 
 ## POC
 
