@@ -2,19 +2,25 @@
 
 ## Summary
 
-Impact of vulnerability: Remote Code Execution
+| Impact of vulnerability | Remote Code Execution                                        |
+| :---------------------- | ------------------------------------------------------------ |
+| Maximum security rating | Important                                                    |
+| Recommendation          | Developers should either upgrade to [Struts 2.2.3.1](http://struts.apache.org/download.cgi#struts2231) or apply the configuration changes described below |
+| Affected Software       | Struts 2.0.0 - Struts 2.2.3                                  |
+| Original JIRA Tickets   | [WW-3668](https://issues.apache.org/jira/browse/WW-3668)     |
+| Reporter                | Hideyuki Suzumi                                              |
+| CVE Identifier          | -                                                            |
 
-Affected Software: `Struts 2.0.0` - `Struts 2.2.3`
+## Problem
 
-Problem: User input is evaluated as an `OGNL` expression when there's a conversion error. This allows a malicious user to execute arbitrary code. 
+当配置了验证规则 `<ActionName>-validation.xml` 时，若类型验证转换出错，后端默认会将用户提交的表单值通过字符串拼接，然后执行一次 OGNL 表达式解析，从而造成远程代码执行。 
 
 ## Environment
 
-Struts2: `struts-2.2.3`
-
-Server: `Tomcat 8.5.53`
-
-IDE: `idea 2020.1.1 ULTIMATE`
+| Struts2 Version | struts-2.2.3           |
+| --------------- | ---------------------- |
+| Server          | Tomcat 8.5.53          |
+| IDE             | idea 2020.1.1 ULTIMATE |
 
 ## POC
 
@@ -22,7 +28,7 @@ IDE: `idea 2020.1.1 ULTIMATE`
 
 ![{A7084584-483F-4AA5-A99E-B1B26E8A911B}_20200619183031]({A7084584-483F-4AA5-A99E-B1B26E8A911B}_20200619183031.jpg)
 
-## Payload
+payload:
 
 - open `calc.exe`
 
