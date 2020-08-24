@@ -11,6 +11,6 @@
     <title>S2-009 Demo</title>
   </head>
   <body>
-  Hello world!
+  <h2>S2-009 Demo</h2>
   </body>
 </html>
