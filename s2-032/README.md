@@ -17,10 +17,10 @@
 
 ## Environment
 
-| Struts2 Version | struts-2.3.24          |
+| Struts2 Version | Struts-2.3.24          |
 | --------------- | ---------------------- |
-| Server          | Tomcat 8.5.53          |
-| IDE             | idea 2020.1.1 ULTIMATE |
+| Web Server      | Tomcat 8.5.53          |
+| IDE             | IDEA 2020.1.1 ULTIMATE |
 
 ## POC
 
