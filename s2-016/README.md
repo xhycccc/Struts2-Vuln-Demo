@@ -2,19 +2,25 @@
 
 ## Summary
 
-Impact of vulnerability: Remote command execution
+| Who should read this    | All Struts 2 developers and users                            |
+| :---------------------- | ------------------------------------------------------------ |
+| Impact of vulnerability | Remote command execution                                     |
+| Maximum security rating | Highly Critical                                              |
+| Recommendation          | Developers should immediately upgrade to [Struts 2.3.15.1](http://struts.apache.org/download.cgi#struts23151) |
+| Affected Software       | Struts 2.0.0 - Struts 2.3.15                                 |
+| Reporter                | Takeshi Terada of Mitsui Bussan Secure Directions, Inc.      |
+| CVE Identifier          | [CVE-2013-2251](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-2251) |
 
-Affected Software:  `Struts 2.0.0` - `Struts 2.3.15`
+## Problem
 
-Problem: 在`struts2`中，`DefaultActionMapper`类支持以`action:`、`redirect:`、`redirectAction:`作为导航或是重定向前缀，但是这些前缀后面同时可以跟`OGNL`表达式，由于`struts2`没有对这些前缀做过滤，导致利用`OGNL`表达式调用`java`静态方法执行任意系统命令。
+在`struts2`中，`DefaultActionMapper`类支持以`action:`、`redirect:`、`redirectAction:`作为导航或是重定向前缀，但是这些前缀后面同时可以跟`OGNL`表达式，由于`struts2`没有对这些前缀做过滤，导致利用`OGNL`表达式调用`java`静态方法执行任意系统命令。
 
 ## Environment
 
-Struts2 Version: `Struts-2.2.3`
-
-Server: `Tomcat 8.5.53`
-
-IDE: `idea 2020.1.1 ULTIMATE`
+| Struts2 Version | struts-2.2.3           |
+| --------------- | ---------------------- |
+| Server          | Tomcat 8.5.53          |
+| IDE             | idea 2020.1.1 ULTIMATE |
 
 ## POC
 
