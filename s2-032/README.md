@@ -2,19 +2,25 @@
 
 ## Summary
 
-Impact of vulnerability: Remote command execution
+| Who should read this    | All Struts 2 developers and users                            |
+| :---------------------- | ------------------------------------------------------------ |
+| Impact of vulnerability | Possible Remote Code Execution                               |
+| Maximum security rating | High                                                         |
+| Recommendation          | Disable Dynamic Method Invocation if possible. Alternatively upgrade to [Struts 2.3.20.3](https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.3.20.3), [Struts 2.3.24.3](https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.3.24.3) or [Struts 2.3.28.1](https://cwiki.apache.org/confluence/display/WW/Version+Notes+2.3.28). |
+| Affected Software       | Struts 2.3.20 - Struts Struts 2.3.28 (except 2.3.20.3 and 2.3.24.3) |
+| Reporter                | Nike Zheng nike dot zheng at dbappsecurity dot com dot cn    |
+| CVE Identifier          | CVE-2016-3081                                                |
 
-Affected Software:  `Struts 2.3.20` - `Struts 2.3.28` (except 2.3.20.3 and 2.3.24.3)
+## Problem
 
-Problem: `Struts2`在开启了动态方法调用（Dynamic Method Invocation）的情况下，可以使用`method:<name>`的方式来调用名字是`<name>`的方法，而这个方法名将会进行`OGNL`表达式计算，导致远程命令执行漏洞。
+`Struts2`在开启了动态方法调用（Dynamic Method Invocation）的情况下，可以使用`method:<name>`的方式来调用名字是`<name>`的方法，而这个方法名将会进行`OGNL`表达式计算，导致远程命令执行漏洞。
 
 ## Environment
 
-Struts2 Version: `Struts-2.3.24`
-
-Server: `Tomcat 8.5.53`
-
-IDE: `idea 2020.1.1 ULTIMATE`
+| Struts2 Version | struts-2.3.24          |
+| --------------- | ---------------------- |
+| Server          | Tomcat 8.5.53          |
+| IDE             | idea 2020.1.1 ULTIMATE |
 
 ## POC
 
@@ -32,7 +38,7 @@ http://localhost:8080/s2_032_war_exploded/index.action?method:%23_memberAccess%3
 
 `s2-032/web/WEB-INF/lib/struts2-core-2.3.24.jar!/org/apache/struts2/dispatcher/mapper/DefaultActionMapper.class:52`
 
-![{178585E3-B3AB-45A1-B0C7-ECC39C2BD274}_20200724112506]({178585E3-B3AB-45A1-B0C7-ECC39C2BD274}_20200724112506.jpg)
+<img src="{178585E3-B3AB-45A1-B0C7-ECC39C2BD274}_20200724112506.jpg" alt="{178585E3-B3AB-45A1-B0C7-ECC39C2BD274}_20200724112506" style="zoom:150%;" />
 
 然后一直点击调试栏红色X的按钮回到`struts2`初始过滤器`StrutsPrepareAndExecuteFilter`，剩下的就和S2-016一样咯。
 
