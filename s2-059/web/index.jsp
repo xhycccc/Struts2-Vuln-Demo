@@ -13,8 +13,8 @@
   </head>
   <body>
   <h2>S2-059 Demo</h2>
-  a标签： <s:url var="url" action="index"/><s:a id="%{skillName}" href="%{url}">List available Employees</s:a><br/>
-  label标签:  <s:label id="%{skillName}" value="label test"/><br/><br/>
+  a： <s:url var="url" action="index"/><s:a id="%{skillName}" href="%{url}">List available Employees</s:a><br/>
+  label:  <s:label id="%{skillName}" value="label test"/><br/><br/>
 
   <s:form action="index" method="POST">
     <s:textfield name="skillName" label="skillName" id="%{skillName}"/>

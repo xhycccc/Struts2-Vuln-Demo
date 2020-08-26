@@ -15,7 +15,7 @@
 
 Struts2 会对某些标签属性（比如`id`，其他属性有待寻找）的属性值进行二次表达式解析，因此当这些标签属性中使用了 %{x} 且 x 的值用户可控时，用户再传入一个 %{payload} 即可造成OGNL表达式执行。（引用自：[Struts2 S2-059 漏洞分析](https://mp.weixin.qq.com/s/VyLiLrUV0yakh_lzTBYGyQ)）
 
-受影响的标签有很多，这里列举三个受影响的标签，分别是`<a>`、`<label>`、`<input>`（参考官方demo改写）：
+受影响的标签有很多，这里列举三个，分别是`<a>`、`<label>`、`<input>`（参考官方demo改写）：
 
 ```jsp
   a标签： <s:url var="url" action="index"/><s:a id="%{skillName}" href="%{url}">List available Employees</s:a><br/>
