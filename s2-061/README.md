@@ -17,7 +17,7 @@ S2-061是对S2-059补丁的绕过。
 
 ## Environment
 
-| Struts2 Version | Struts-2.3.24          |
+| Struts2 Version | Struts-2.5.25          |
 | :-------------- | :--------------------- |
 | Web Server      | Tomcat 8.5.53          |
 | IDE             | IDEA 2020.1.1 ULTIMATE |
