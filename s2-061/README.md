@@ -32,6 +32,10 @@ S2-061是对S2-059补丁的绕过。
 
 ![](img/AE154B9A-281D-4085-83F9-0A2D55B3016E.png)
 
+## Debug
+
+Debug流程还是跟s2-059相同，可参考s2-059的debug分析。
+
 ## Reference
 
 - [S2-061](https://cwiki.apache.org/confluence/display/WW/S2-061)
